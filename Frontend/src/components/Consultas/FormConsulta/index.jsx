@@ -10,19 +10,21 @@ export function FormConsulta() {
   const [error, setError] = useState('')
   
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(form.current)
-    if (formData.get('consultas') !== '') {
-      const newObject = {
-        'consultas' : formData.get('consultas'),
-      }
-      postConsultas(id, newObject) 
-        .then(window.location.reload(true))
+    e.preventDefault();
+    const formData = new FormData(form.current);
+    
+    const capitalizedFormData = {
+      consultas: formData.get('consultas').toUpperCase(),
+    };
+  
+    if (capitalizedFormData.consultas !== '') {
+      postConsultas(id, capitalizedFormData)
+        .then(() => window.location.reload(true))
     } else {
-      setError('Complete el campo')
+      setError('Complete el campo');
     }
-
-  }
+  };
+  
   return (
     <Form ref={form} onSubmit={handleSubmit}> 
       <Form.Label htmlFor="disabledTextInput">Consulta</Form.Label>

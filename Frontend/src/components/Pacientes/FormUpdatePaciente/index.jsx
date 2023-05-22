@@ -17,34 +17,30 @@ export function FormUpdatePaciente() {
   },[id])
 
   const handleUpdate = (e) => {
-    e.preventDefault()
-    const formData = new FormData(form.current)
+    e.preventDefault();
+    const formData = new FormData(form.current);
+  
+    const capitalizedFormData = Object.fromEntries(
+      Array.from(formData.entries()).map(([name, value]) => [name, value.toUpperCase()])
+    );
+  
     if (
-      formData.get('nombre') !== '' &&
-      formData.get('apellido') !== '' &&
-      formData.get('localidad') !== '' &&
-      formData.get('fecha_nacimiento') !== '' &&
-      formData.get('dni') !== '' &&
-      formData.get('edad') !== '' &&
-      formData.get('telefono') !== '' &&
-      formData.get('obra_social') !== '' 
+      capitalizedFormData.nombre !== '' &&
+      capitalizedFormData.apellido !== '' &&
+      capitalizedFormData.localidad !== '' &&
+      capitalizedFormData.fecha_nacimiento !== '' &&
+      capitalizedFormData.dni !== '' &&
+      capitalizedFormData.edad !== '' &&
+      capitalizedFormData.telefono !== '' &&
+      capitalizedFormData.obra_social !== ''
     ) {
-      const newObject =  {
-        'nombre': formData.get('nombre'),
-        'apellido': formData.get('apellido'),
-        'localidad': formData.get('localidad'),
-        'fecha_nacimiento': formData.get('fecha_nacimiento'),
-        'dni': formData.get('dni'),
-        'edad': formData.get('edad'),
-        'telefono': formData.get('telefono'),
-        'obra_social': formData.get('obra_social')
-      }
-      updatePacientes(id, newObject)
-        .then(window.location.reload(true))
+      updatePacientes(id, capitalizedFormData)
+        .then(() => window.location.reload(true))
     } else {
-      setError('Complete todos los campos!')
+      setError('Complete todos los campos!');
     }
-  }
+  };
+  
   
   return (
     <Form ref={form} onSubmit={handleUpdate}>
