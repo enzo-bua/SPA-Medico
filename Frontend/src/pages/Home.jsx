@@ -1,12 +1,13 @@
 import React from 'react'
-import {Pacientes} from '../components/Pacientes'
-import { AgregarPaciente } from '../components/AgregarPaciente'
-
+import { Paciente } from '../components/Pacientes/Paciente'
+import { AgregarPaciente } from '../components/Pacientes/AgregarPaciente'
+import { CerrarSesion } from '../components/Usuario/CerrarSesion'
 export function Home({ pacientes, loading }) {
   return (
     <>
+     <CerrarSesion />
      <AgregarPaciente />
-     <Pacientes pacientes={pacientes} loading={loading}/>
+     <Paciente pacientes={pacientes} loading={loading}/>
     </>
     )
 }

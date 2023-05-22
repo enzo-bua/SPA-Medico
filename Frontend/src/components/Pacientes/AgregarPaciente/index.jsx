@@ -1,8 +1,6 @@
-import './index.css'
 import React, { useState } from 'react'
-
-import { Modals } from '../Modal';
 import { FormPaciente } from '../FormPaciente';
+import { Modals } from '../../Modal';
 export function AgregarPaciente() {
   const [show, setShow] = useState(false);
 
