@@ -61,6 +61,7 @@ export const updatePaciente = async (req: Request, res: Response) => {
   try {
     const paciente = await Paciente.findOneBy({id: parseInt(req.params.id)})
     if (!paciente) return res.status(404).json({ message: 'Paciente no existente'})
+    
     await Paciente.update({ id: parseInt(id) }, req.body)
     return res.status(204)
   } catch (error: any) {

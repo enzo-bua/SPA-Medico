@@ -115,5 +115,36 @@ export const updateConsulta = async (req: Request, res: Response) => {
   }
 };
 
+export const deleteConsulta = async (req: Request, res: Response) => {
+  const pacienteId = parseInt(req.params.id_paciente)
+    const paciente = await Paciente.find({
+      where: {
+        id: pacienteId
+      }
+    })
+
+  if (paciente.length === 0) {
+    return res.status(404).json({ message: "Paciente no encontrado" });
+  }
+  
+  const consulta = await Consulta.find({
+    relations: {
+      paciente: true
+    },
+    where: {
+      id: parseInt(req.params.id_consulta),
+      consulta_paciente: paciente[0].id
+    }
+  })
+
+  if (consulta.length === 0) {
+    return res.status(404).json({ message: "Consulta no encontrada" });
+  }
+  
+  consulta[0].remove()
+  
+
+}
+
 
 

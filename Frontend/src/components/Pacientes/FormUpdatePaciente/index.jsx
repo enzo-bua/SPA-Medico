@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useParams } from 'react-router-dom';
 import { getPaciente } from '../../../service/Pacientes/getPaciente'
+import { updatePacientes } from '../../../service/Pacientes/updatePacientes';
 export function FormUpdatePaciente() {
   const [paciente, setPaciente] = useState([])
   const [error, setError] = useState('')
@@ -35,7 +36,7 @@ export function FormUpdatePaciente() {
       capitalizedFormData.obra_social !== ''
     ) {
       updatePacientes(id, capitalizedFormData)
-        .then(() => window.location.reload(true))
+        .then(window.location.reload(true))
     } else {
       setError('Complete todos los campos!');
     }

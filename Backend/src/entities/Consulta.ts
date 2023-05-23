@@ -3,7 +3,8 @@ import {
   PrimaryGeneratedColumn, 
   Entity, BaseEntity,
   ManyToOne,
-  JoinColumn
+  JoinColumn,
+  CreateDateColumn
 } from 'typeorm'
 import { Paciente } from './Paciente';
 
@@ -17,6 +18,9 @@ export class Consulta extends BaseEntity {
 
   @Column()
   consulta_paciente: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @ManyToOne(() => Paciente, paciente => paciente.consulta, {
     onUpdate: 'CASCADE',
